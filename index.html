@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KnowBot — Your Expertise, Available 24/7</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #080d1a;
+  --navy2: #0d1526;
+  --navy3: #131f35;
+  --teal: #00e5c4;
+  --teal2: #00b89e;
+  --teal-dim: rgba(0,229,196,0.08);
+  --teal-border: rgba(0,229,196,0.2);
+  --white: #f0f4ff;
+  --muted: rgba(240,244,255,0.45);
+  --border: rgba(240,244,255,0.08);
+  --card: rgba(255,255,255,0.03);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(180deg, rgba(8,13,26,0.95) 0%, transparent 100%);
+  backdrop-filter: blur(8px);
+}
+
+.nav-logo {
+  font-size: 20px; font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--white);
+}
+.nav-logo span { color: var(--teal); }
+
+.nav-cta {
+  padding: 9px 22px;
+  background: var(--teal);
+  color: var(--navy);
+  border: none; border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: #00ffd5; transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  padding: 140px 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Animated grid bg */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,229,196,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,196,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* Glow blob */
+body::after {
+  content: '';
+  position: fixed;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0,229,196,0.06) 0%, transparent 65%);
+  top: -200px; right: -200px;
+  pointer-events: none; z-index: 0;
+}
+
+.hero-left { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--teal-border);
+  background: var(--teal-dim);
+  padding: 6px 14px; border-radius: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--teal); text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+h1 {
+  font-size: clamp(48px, 5.5vw, 80px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+h1 .line2 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--teal);
+  display: block;
+  letter-spacing: -1px;
+}
+
+h1 .line3 {
+  display: block;
+  font-size: clamp(44px, 5vw, 74px);
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: 40px;
+  font-weight: 400;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+/* ─── WAITLIST FORM ─── */
+.waitlist-form {
+  display: flex; gap: 10px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.waitlist-form input {
+  flex: 1;
+  padding: 15px 20px;
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.waitlist-form input:focus {
+  border-color: var(--teal-border);
+  box-shadow: 0 0 0 3px rgba(0,229,196,0.06);
+}
+.waitlist-form input::placeholder { color: rgba(240,244,255,0.25); }
+
+.waitlist-btn {
+  padding: 15px 28px;
+  background: var(--teal);
+  color: var(--navy);
+  border: none; border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
+}
+.waitlist-btn:hover { background: #00ffd5; transform: translateY(-1px); }
+.waitlist-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.form-note {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--muted);
+  animation: fadeUp 0.6s 0.35s ease both;
+}
+
+.counter-row {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 32px;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.avatars {
+  display: flex;
+}
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--navy);
+  margin-left: -8px; first-child { margin-left: 0; }
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  background: var(--navy3);
+}
+.avatars .avatar:first-child { margin-left: 0; }
+
+.counter-text {
+  font-size: 13px; color: var(--muted); font-weight: 400;
+}
+.counter-text strong { color: var(--white); font-weight: 700; }
+
+/* ─── DEMO PREVIEW ─── */
+.hero-right {
+  position: relative; z-index: 1;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.demo-window {
+  background: var(--navy2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,196,0.05);
+}
+
+.demo-titlebar {
+  background: var(--navy3);
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-dots { display: flex; gap: 6px; }
+.demo-dot { width: 10px; height: 10px; border-radius: 50%; }
+.demo-dot.r { background: #ff5f57; }
+.demo-dot.y { background: #febc2e; }
+.demo-dot.g { background: #28c840; }
+
+.demo-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; color: var(--muted);
+  margin-left: 8px; letter-spacing: 0.05em;
+}
+
+.demo-body {
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 320px;
+}
+
+.demo-bot-header {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-avatar {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--teal2), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+
+.demo-bot-name { font-size: 13px; font-weight: 700; }
+.demo-bot-niche { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+.demo-status {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; color: var(--teal); letter-spacing: 0.1em;
+}
+.demo-status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+}
+
+.demo-msg { display: flex; gap: 8px; }
+.demo-msg.user { flex-direction: row-reverse; }
+
+.demo-msg-avatar {
+  width: 26px; height: 26px; border-radius: 7px;
+  flex-shrink: 0; display: flex; align-items: center;
+  justify-content: center; font-size: 12px;
+}
+.demo-msg.bot .demo-msg-avatar {
+  background: linear-gradient(135deg, var(--teal2), var(--teal));
+}
+.demo-msg.user .demo-msg-avatar {
+  background: var(--navy3); border: 1px solid var(--border);
+  font-size: 9px; font-family: 'IBM Plex Mono', monospace; color: var(--muted);
+}
+
+.demo-bubble {
+  max-width: 76%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5px; line-height: 1.55;
+  font-weight: 400;
+}
+.demo-msg.bot .demo-bubble {
+  background: var(--navy3); border: 1px solid var(--border);
+  color: var(--white); border-radius: 3px 10px 10px 10px;
+}
+.demo-msg.user .demo-bubble {
+  background: var(--teal-dim); border: 1px solid var(--teal-border);
+  color: var(--white); border-radius: 10px 3px 10px 10px;
+}
+
+/* ─── SOCIAL PROOF TICKER ─── */
+.ticker-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--navy2);
+}
+
+.ticker-track {
+  display: flex; gap: 48px;
+  animation: ticker 22s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.12em;
+  color: var(--muted); text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.ticker-item span { color: var(--teal); }
+.ticker-sep { color: var(--teal); opacity: 0.4; }
+
+/* ─── HOW IT WORKS ─── */
+.section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 100px 48px;
+  position: relative; z-index: 1;
+}
+
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800; letter-spacing: -1.5px;
+  line-height: 1.0;
+  margin-bottom: 60px;
+}
+
+.section-title em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400; font-style: italic;
+  color: var(--teal);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.step-card {
+  background: var(--navy2);
+  padding: 40px 36px;
+  transition: background 0.2s;
+}
+.step-card:hover { background: var(--navy3); }
+
+.step-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em;
+  color: var(--teal); margin-bottom: 20px;
+}
+
+.step-icon { font-size: 36px; margin-bottom: 16px; }
+
+.step-card h3 {
+  font-size: 20px; font-weight: 700;
+  letter-spacing: -0.3px; margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.65; font-weight: 400;
+}
+
+/* ─── USE CASES ─── */
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.use-case-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 22px;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+.use-case-card:hover {
+  border-color: var(--teal-border);
+  background: var(--teal-dim);
+}
+
+.uc-emoji { font-size: 28px; margin-bottom: 12px; }
+.uc-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.uc-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; font-weight: 400; }
+
+/* ─── BIG CTA ─── */
+.cta-section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 40px 48px 120px;
+  position: relative; z-index: 1;
+}
+
+.cta-box {
+  background: var(--navy2);
+  border: 1px solid var(--teal-border);
+  border-radius: 24px;
+  padding: 72px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-box::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,229,196,0.07) 0%, transparent 65%);
+  top: -200px; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.cta-box h2 {
+  font-size: clamp(36px, 4vw, 60px);
+  font-weight: 800; letter-spacing: -1.5px;
+  line-height: 1.0; margin-bottom: 16px;
+}
+
+.cta-box h2 em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400; font-style: italic; color: var(--teal);
+}
+
+.cta-box p {
+  font-size: 16px; color: var(--muted);
+  max-width: 420px; margin: 0 auto 40px;
+  line-height: 1.7; font-weight: 400;
+}
+
+.cta-form {
+  display: flex; gap: 10px;
+  max-width: 480px; margin: 0 auto 16px;
+}
+
+.cta-form input {
+  flex: 1; padding: 15px 20px;
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'Syne', sans-serif; font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.cta-form input:focus { border-color: var(--teal-border); }
+.cta-form input::placeholder { color: rgba(240,244,255,0.25); }
+
+.cta-form button {
+  padding: 15px 28px;
+  background: var(--teal); color: var(--navy);
+  border: none; border-radius: 10px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.cta-form button:hover { background: #00ffd5; transform: translateY(-1px); }
+.cta-form button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.cta-note {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; color: var(--muted);
+}
+
+/* ─── SUCCESS STATE ─── */
+.success-msg {
+  display: none;
+  flex-direction: column; align-items: center; gap: 10px;
+  padding: 20px;
+}
+.success-msg .check { font-size: 40px; }
+.success-msg h3 {
+  font-size: 22px; font-weight: 800;
+  color: var(--teal); letter-spacing: -0.5px;
+}
+.success-msg p { font-size: 14px; color: var(--muted); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+
+.footer-logo { font-size: 16px; font-weight: 800; }
+.footer-logo span { color: var(--teal); }
+
+.footer-copy {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; color: var(--muted);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; }
+  .hero-right { display: none; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .use-cases-grid { grid-template-columns: 1fr 1fr; }
+  nav { padding: 16px 24px; }
+  .section { padding: 72px 24px; }
+  .cta-box { padding: 48px 24px; }
+  .cta-form { flex-direction: column; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+@media (max-width: 560px) {
+  .waitlist-form { flex-direction: column; }
+  .use-cases-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── LIVE DEMO SECTION ─── */
+.demo-section {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%);
+  padding: 100px 48px;
+}
+
+.demo-section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.demo-section-left { }
+
+.demo-section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.demo-section-title {
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 800; letter-spacing: -1.5px;
+  line-height: 1.0; margin-bottom: 16px;
+}
+
+.demo-section-title em {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400; font-style: italic; color: var(--teal);
+}
+
+.demo-section-sub {
+  font-size: 15px; color: var(--muted); line-height: 1.7;
+  font-weight: 400; margin-bottom: 32px; max-width: 400px;
+}
+
+.demo-persona-switcher {
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.demo-persona-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  text-align: left;
+}
+.demo-persona-btn:hover {
+  border-color: var(--teal-border);
+  background: var(--teal-dim);
+}
+.demo-persona-btn.active {
+  border-color: var(--teal);
+  background: var(--teal-dim);
+}
+
+.persona-emoji { font-size: 24px; flex-shrink: 0; }
+
+.persona-info { flex: 1; }
+.persona-name {
+  font-size: 13px; font-weight: 700; color: var(--white);
+  margin-bottom: 2px;
+}
+.persona-niche {
+  font-size: 11px; color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.03em;
+}
+
+.persona-arrow {
+  color: var(--teal); font-size: 14px;
+  opacity: 0; transition: opacity 0.2s;
+}
+.demo-persona-btn.active .persona-arrow,
+.demo-persona-btn:hover .persona-arrow { opacity: 1; }
+
+/* Live chat UI */
+.demo-chat-container {
+  display: flex; flex-direction: column;
+  background: var(--navy2);
+  border: 1px solid var(--teal-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,229,196,0.05);
+  height: 520px;
+}
+
+.demo-chat-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  background: var(--navy3);
+  flex-shrink: 0;
+}
+
+.demo-chat-avatar {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--teal2), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.demo-chat-info { flex: 1; }
+.demo-chat-name {
+  font-size: 14px; font-weight: 700;
+  transition: all 0.3s ease;
+}
+.demo-chat-role {
+  font-size: 11px; color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  margin-top: 1px;
+  transition: all 0.3s ease;
+}
+
+.demo-live-badge {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; color: var(--teal); letter-spacing: 0.12em;
+  border: 1px solid var(--teal-border);
+  padding: 4px 10px; border-radius: 20px;
+  background: var(--teal-dim);
+}
+.live-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+}
+
+.demo-messages {
+  flex: 1; overflow-y: auto;
+  padding: 20px; display: flex;
+  flex-direction: column; gap: 14px;
+  scroll-behavior: smooth;
+}
+
+.demo-messages::-webkit-scrollbar { width: 3px; }
+.demo-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.dm { display: flex; gap: 8px; }
+.dm.user { flex-direction: row-reverse; }
+
+.dm-av {
+  width: 28px; height: 28px; border-radius: 8px;
+  flex-shrink: 0; display: flex; align-items: center;
+  justify-content: center; font-size: 13px;
+  transition: all 0.3s;
+}
+.dm.bot .dm-av {
+  background: linear-gradient(135deg, var(--teal2), var(--teal));
+}
+.dm.user .dm-av {
+  background: var(--navy3); border: 1px solid var(--border);
+  font-size: 9px; font-family: 'IBM Plex Mono', monospace; color: var(--muted);
+}
+
+.dm-bubble {
+  max-width: 78%; padding: 11px 14px;
+  font-size: 13px; line-height: 1.55; font-weight: 400;
+  animation: msgIn 0.3s ease both;
+}
+.dm.bot .dm-bubble {
+  background: var(--navy3); border: 1px solid var(--border);
+  color: var(--white); border-radius: 3px 10px 10px 10px;
+}
+.dm.user .dm-bubble {
+  background: var(--teal-dim); border: 1px solid var(--teal-border);
+  color: var(--white); border-radius: 10px 3px 10px 10px;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.typing-ind {
+  display: flex; gap: 4px; align-items: center; padding: 2px 0;
+}
+.typing-ind span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--muted);
+  animation: typBounce 1.1s infinite ease-in-out;
+}
+.typing-ind span:nth-child(2) { animation-delay: 0.18s; }
+.typing-ind span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes typBounce {
+  0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.demo-suggestions {
+  padding: 0 20px 12px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.suggestion-chip {
+  padding: 6px 12px;
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 11px; color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.suggestion-chip:hover {
+  border-color: var(--teal-border);
+  color: var(--teal);
+  background: var(--teal-dim);
+}
+
+.demo-input-row {
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 8px;
+  flex-shrink: 0;
+}
+
+.demo-input-row input {
+  flex: 1; padding: 11px 14px;
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'Syne', sans-serif; font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.demo-input-row input:focus { border-color: var(--teal-border); }
+.demo-input-row input::placeholder { color: rgba(240,244,255,0.2); font-style: italic; }
+
+.demo-send-btn {
+  padding: 11px 16px;
+  background: var(--teal); color: var(--navy);
+  border: none; border-radius: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  cursor: pointer; flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+}
+.demo-send-btn:hover { background: #00ffd5; transform: translateY(-1px); }
+.demo-send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.demo-cta-nudge {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: var(--teal-dim);
+  border: 1px solid var(--teal-border);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.nudge-text { font-size: 13px; color: var(--white); font-weight: 600; }
+.nudge-text span { color: var(--teal); }
+.nudge-btn {
+  padding: 9px 18px;
+  background: var(--teal); color: var(--navy);
+  border: none; border-radius: 8px;
+  font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.nudge-btn:hover { background: #00ffd5; }
+
+@media (max-width: 900px) {
+  .demo-section { padding: 72px 24px; }
+  .demo-section-inner { grid-template-columns: 1fr; gap: 40px; }
+  .demo-chat-container { height: 440px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Know<span>Bot</span></div>
+  <div style="display:flex; gap:12px; align-items:center;">
+    <a href="#try-it" style="font-size:13px; color:var(--muted); text-decoration:none; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--muted)'">Try Demo</a>
+    <a href="#cta" class="nav-cta">Join Waitlist →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Early Access · Limited Spots
+    </div>
+
+    <h1>
+      Your knowledge,
+      <em class="line2">always on.</em>
+      <span class="line3">Never offline.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Build an AI chatbot trained on <em>your</em> expertise in 2 minutes. Let it answer your audience's questions 24/7 — while you sleep, create, or take a day off.
+    </p>
+
+    <div class="waitlist-form">
+      <input type="email" id="heroEmail" placeholder="your@email.com" />
+      <button class="waitlist-btn" onclick="joinWaitlist('heroEmail', 'heroSuccess')">Get Early Access</button>
+    </div>
+    <div id="heroSuccess" class="success-msg" style="display:none; flex-direction:row; align-items:center; gap:8px; margin-bottom:12px;">
+      <span>✅</span>
+      <span style="font-size:13px; color:var(--teal); font-weight:700;">You're on the list! We'll be in touch soon.</span>
+    </div>
+    <p class="form-note">✦ FREE for first 100 experts &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; No spam, ever</p>
+
+    <div class="counter-row">
+      <div class="avatars">
+        <div class="avatar">🧑‍⚕️</div>
+        <div class="avatar">👩‍💼</div>
+        <div class="avatar">🧑‍🍳</div>
+        <div class="avatar">👩‍🏫</div>
+        <div class="avatar">🧑‍💻</div>
+      </div>
+      <p class="counter-text"><strong id="signupCount">247</strong> experts already on the waitlist</p>
+    </div>
+  </div>
+
+  <!-- DEMO PREVIEW -->
+  <div class="hero-right">
+    <div class="demo-window">
+      <div class="demo-titlebar">
+        <div class="demo-dots">
+          <div class="demo-dot r"></div>
+          <div class="demo-dot y"></div>
+          <div class="demo-dot g"></div>
+        </div>
+        <div class="demo-title">knowbot.ai/dr-sarah-chen</div>
+      </div>
+      <div class="demo-body">
+        <div class="demo-bot-header">
+          <div class="demo-avatar">🥗</div>
+          <div>
+            <div class="demo-bot-name">Dr. Sarah Chen's Assistant</div>
+            <div class="demo-bot-niche">Functional Nutrition Coach</div>
+          </div>
+          <div class="demo-status">
+            <div class="demo-status-dot"></div>
+            LIVE
+          </div>
+        </div>
+
+        <div class="demo-msg bot">
+          <div class="demo-msg-avatar">🥗</div>
+          <div class="demo-bubble">Hi! I'm Dr. Sarah's AI assistant. Ask me anything about nutrition, gut health, or her 12-week programme. 👋</div>
+        </div>
+
+        <div class="demo-msg user">
+          <div class="demo-msg-avatar">You</div>
+          <div class="demo-bubble">What foods should I avoid for gut inflammation?</div>
+        </div>
+
+        <div class="demo-msg bot">
+          <div class="demo-msg-avatar">🥗</div>
+          <div class="demo-bubble">Dr. Sarah recommends eliminating gluten, refined sugar, seed oils, and alcohol first — these are the biggest inflammation triggers she sees in clinic. Start with a 21-day elimination, then reintroduce one at a time. Want her full protocol?</div>
+        </div>
+
+        <div class="demo-msg user">
+          <div class="demo-msg-avatar">You</div>
+          <div class="demo-bubble">Yes please! And does she offer 1:1 coaching?</div>
+        </div>
+
+        <div class="demo-msg bot" id="typingDemo">
+          <div class="demo-msg-avatar">🥗</div>
+          <div class="demo-bubble" id="typingBubble">
+            <span id="typingDots">●●●</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item">🥗 Nutrition Coaches <span>✦</span></div>
+    <div class="ticker-item">⚖️ Legal Consultants <span>✦</span></div>
+    <div class="ticker-item">💪 Fitness Trainers <span>✦</span></div>
+    <div class="ticker-item">🧠 Therapists & Coaches <span>✦</span></div>
+    <div class="ticker-item">📈 Finance Advisors <span>✦</span></div>
+    <div class="ticker-item">👨‍🍳 Chefs & Culinary Experts <span>✦</span></div>
+    <div class="ticker-item">💻 Tech Educators <span>✦</span></div>
+    <div class="ticker-item">🎨 Creative Directors <span>✦</span></div>
+    <div class="ticker-item">📚 Course Creators <span>✦</span></div>
+    <div class="ticker-item">🚀 Business Strategists <span>✦</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item">🥗 Nutrition Coaches <span>✦</span></div>
+    <div class="ticker-item">⚖️ Legal Consultants <span>✦</span></div>
+    <div class="ticker-item">💪 Fitness Trainers <span>✦</span></div>
+    <div class="ticker-item">🧠 Therapists & Coaches <span>✦</span></div>
+    <div class="ticker-item">📈 Finance Advisors <span>✦</span></div>
+    <div class="ticker-item">👨‍🍳 Chefs & Culinary Experts <span>✦</span></div>
+    <div class="ticker-item">💻 Tech Educators <span>✦</span></div>
+    <div class="ticker-item">🎨 Creative Directors <span>✦</span></div>
+    <div class="ticker-item">📚 Course Creators <span>✦</span></div>
+    <div class="ticker-item">🚀 Business Strategists <span>✦</span></div>
+  </div>
+</div>
+
+<!-- LIVE DEMO -->
+<div class="demo-section" id="try-it">
+  <div class="demo-section-inner">
+
+    <div class="demo-section-left">
+      <p class="demo-section-label">// Try it live — no signup needed</p>
+      <h2 class="demo-section-title">Chat with a real<br><em>KnowBot</em> now</h2>
+      <p class="demo-section-sub">These are real AI chatbots trained on expert knowledge. Ask anything — this is exactly what your audience will experience with your bot.</p>
+
+      <div class="demo-persona-switcher">
+        <button class="demo-persona-btn active" onclick="switchPersona(0)" id="persona-btn-0">
+          <div class="persona-emoji">🥗</div>
+          <div class="persona-info">
+            <div class="persona-name">Dr. Maya Patel</div>
+            <div class="persona-niche">Functional Nutrition Coach</div>
+          </div>
+          <div class="persona-arrow">→</div>
+        </button>
+        <button class="demo-persona-btn" onclick="switchPersona(1)" id="persona-btn-1">
+          <div class="persona-emoji">💼</div>
+          <div class="persona-info">
+            <div class="persona-name">Marcus Webb</div>
+            <div class="persona-niche">Startup Business Strategist</div>
+          </div>
+          <div class="persona-arrow">→</div>
+        </button>
+        <button class="demo-persona-btn" onclick="switchPersona(2)" id="persona-btn-2">
+          <div class="persona-emoji">🧘</div>
+          <div class="persona-info">
+            <div class="persona-name">Leila Ahmadi</div>
+            <div class="persona-niche">Mindfulness & Burnout Coach</div>
+          </div>
+          <div class="persona-arrow">→</div>
+        </button>
+      </div>
+
+      <div class="demo-cta-nudge" style="margin-top:24px;">
+        <div class="nudge-text">Want to build <span>your own</span> bot like this?</div>
+        <a href="#cta" class="nudge-btn">Join Waitlist →</a>
+      </div>
+    </div>
+
+    <div class="demo-section-right">
+      <div class="demo-chat-container">
+        <div class="demo-chat-header">
+          <div class="demo-chat-avatar" id="demoAvatar">🥗</div>
+          <div class="demo-chat-info">
+            <div class="demo-chat-name" id="demoChatName">Dr. Maya Patel's Assistant</div>
+            <div class="demo-chat-role" id="demoChatRole">Functional Nutrition Coach</div>
+          </div>
+          <div class="demo-live-badge">
+            <div class="live-dot"></div>
+            LIVE
+          </div>
+        </div>
+
+        <div class="demo-messages" id="demoMessages"></div>
+
+        <div class="demo-suggestions" id="demoSuggestions"></div>
+
+        <div class="demo-input-row">
+          <input type="text" id="demoInput" placeholder="Ask anything…" onkeydown="if(event.key==='Enter') demoSend()" />
+          <button class="demo-send-btn" id="demoSendBtn" onclick="demoSend()">Send →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <p class="section-label">// How it works</p>
+  <h2 class="section-title">Three steps to your<br><em>AI twin</em></h2>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">STEP 01</div>
+      <div class="step-icon">📋</div>
+      <h3>Paste your knowledge</h3>
+      <p>Drop in your FAQs, course content, methodology, and common client questions. Any text works — no formatting needed.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 02</div>
+      <div class="step-icon">⚡</div>
+      <h3>Your bot goes live</h3>
+      <p>In under 2 minutes, your branded AI chatbot is trained on everything you know. It speaks in your voice, with your expertise.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 03</div>
+      <div class="step-icon">🌍</div>
+      <h3>Share it everywhere</h3>
+      <p>Embed it on your website, link it in your bio, add it to your course. Your audience gets answers instantly — any hour, any day.</p>
+    </div>
+  </div>
+</div>
+
+<!-- USE CASES -->
+<div class="section" style="padding-top: 0;">
+  <p class="section-label">// Who it's for</p>
+  <h2 class="section-title">Built for experts who<br><em>can't clone themselves</em></h2>
+
+  <div class="use-cases-grid">
+    <div class="use-case-card">
+      <div class="uc-emoji">🥗</div>
+      <div class="uc-title">Nutrition & Health Coaches</div>
+      <div class="uc-desc">Answer "what should I eat?" at midnight. Your bot handles intake questions so you focus on deep client work.</div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-emoji">⚖️</div>
+      <div class="uc-title">Legal & Finance Consultants</div>
+      <div class="uc-desc">Triage client questions instantly. Your bot qualifies leads and answers FAQs so you bill time on real work.</div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-emoji">📚</div>
+      <div class="uc-title">Course Creators & Educators</div>
+      <div class="uc-desc">Give every student a TA trained on your curriculum. Cut support emails by 80% without lifting a finger.</div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-emoji">💪</div>
+      <div class="uc-title">Fitness Trainers & Coaches</div>
+      <div class="uc-desc">Your programme, always available. Members get form tips, nutrition advice, and motivation at 6am.</div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-emoji">🧠</div>
+      <div class="uc-title">Therapists & Life Coaches</div>
+      <div class="uc-desc">Offer a safe first touchpoint. Your bot shares your approach and books discovery calls on autopilot.</div>
+    </div>
+    <div class="use-case-card">
+      <div class="uc-emoji">🚀</div>
+      <div class="uc-title">Business & Strategy Advisors</div>
+      <div class="uc-desc">Let prospects experience your thinking before they hire you. Your IP becomes your best salesperson.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BIG CTA -->
+<div class="cta-section" id="cta">
+  <div class="cta-box">
+    <h2>Ready to be<br><em>always on?</em></h2>
+    <p>Join 247+ experts securing their free early access. First 100 get lifetime free tier — no catch.</p>
+
+    <div id="ctaFormWrap">
+      <div class="cta-form">
+        <input type="email" id="ctaEmail" placeholder="your@email.com" />
+        <button onclick="joinWaitlist('ctaEmail', 'ctaSuccess')">Claim My Spot →</button>
+      </div>
+      <p class="cta-note">✦ FREE early access &nbsp;·&nbsp; No credit card &nbsp;·&nbsp; Unsubscribe anytime</p>
+    </div>
+
+    <div id="ctaSuccess" class="success-msg">
+      <span class="check">🎉</span>
+      <h3>You're on the list!</h3>
+      <p>We'll email you the moment early access opens. Expect something special.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Know<span>Bot</span></div>
+  <div class="footer-copy">© 2026 KnowBot · Built with Claude · All rights reserved</div>
+</footer>
+
+<script>
+// Animated counter
+let count = 247;
+function animateCounter() {
+  const el = document.getElementById('signupCount');
+  const target = count;
+  let current = target - 12;
+  const step = () => {
+    if (current < target) {
+      current++;
+      el.textContent = current;
+      setTimeout(step, 80);
+    }
+  };
+  step();
+}
+setTimeout(animateCounter, 800);
+
+// Simulate typing in demo
+setTimeout(() => {
+  const bubble = document.getElementById('typingBubble');
+  const dots = document.getElementById('typingDots');
+  if (!bubble || !dots) return;
+
+  let i = 0;
+  const dotAnim = setInterval(() => {
+    dots.textContent = ['●●●','○●●','●○●','●●○'][i % 4];
+    i++;
+  }, 400);
+
+  setTimeout(() => {
+    clearInterval(dotAnim);
+    bubble.textContent = "Absolutely! She runs intimate 12-week 1:1 programmes — spots are limited. I'd love to add you to her interest list. Can I grab your email? 📩";
+    count++;
+  }, 2800);
+}, 1200);
+
+// Waitlist form handler — calls secure Vercel Edge Function
+async function joinWaitlist(inputId, successId) {
+  const input = document.getElementById(inputId);
+  const email = input.value.trim();
+  const btn = input.parentElement.querySelector('button');
+
+  // Basic client-side validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    input.style.borderColor = '#ff5f57';
+    input.placeholder = 'Please enter a valid email';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.placeholder = 'your@email.com';
+    }, 2000);
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Saving…';
+
+  try {
+    const res = await fetch('/api/waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        source: inputId === 'ctaEmail' ? 'Bottom CTA' : 'Hero'
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      // Show error inline
+      btn.disabled = false;
+      btn.textContent = originalText;
+      input.style.borderColor = '#ff5f57';
+      input.placeholder = data.error || 'Something went wrong — try again';
+      input.value = '';
+      setTimeout(() => {
+        input.style.borderColor = '';
+        input.placeholder = 'your@email.com';
+      }, 3000);
+      return;
+    }
+
+    // Success — show confirmation
+    const success = document.getElementById(successId);
+    if (inputId === 'ctaEmail') {
+      document.getElementById('ctaFormWrap').style.display = 'none';
+    } else {
+      input.style.display = 'none';
+      btn.style.display = 'none';
+    }
+    success.style.display = 'flex';
+
+    // Increment live counter
+    count++;
+    document.getElementById('signupCount').textContent = count;
+
+  } catch (err) {
+    // Network error fallback
+    btn.disabled = false;
+    btn.textContent = originalText;
+    input.style.borderColor = '#ff5f57';
+    input.placeholder = 'Network error — please try again';
+    input.value = '';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.placeholder = 'your@email.com';
+    }, 3000);
+    console.error('Waitlist signup error:', err);
+  }
+}
+
+// Enter key on email fields
+document.getElementById('heroEmail').addEventListener('keydown', e => {
+  if (e.key === 'Enter') joinWaitlist('heroEmail', 'heroSuccess');
+});
+document.getElementById('ctaEmail').addEventListener('keydown', e => {
+  if (e.key === 'Enter') joinWaitlist('ctaEmail', 'ctaSuccess');
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.step-card, .use-case-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+
+// ─── LIVE DEMO ───
+const PERSONAS = [
+  {
+    emoji: '🥗',
+    name: 'Dr. Maya Patel',
+    role: 'Functional Nutrition Coach',
+    welcome: "Hi! I'm Dr. Maya's AI assistant. I can help you with nutrition questions, gut health, meal planning, and her signature 8-week Reset programme. What's on your mind?",
+    suggestions: ['What foods cause inflammation?', 'How do I fix my gut health?', 'What does Dr. Maya recommend for energy?'],
+    system: `You are the AI assistant for Dr. Maya Patel, a Functional Nutrition Coach with 12 years of clinical experience. Be warm, science-backed, and practical.
+
+Your knowledge base:
+- Dr. Maya specialises in gut health, hormone balance, and anti-inflammatory nutrition
+- Her core philosophy: food is information, not just fuel. Every bite sends a signal to your body.
+- Top foods she recommends: leafy greens, wild salmon, fermented foods (kefir, kimchi, sauerkraut), extra virgin olive oil, blueberries, turmeric, ginger
+- Foods to eliminate first: gluten (for sensitive individuals), refined sugar, seed oils (canola, sunflower, soybean), ultra-processed foods, alcohol
+- For gut health: focus on fibre diversity — aim for 30 different plant foods per week. Bone broth, collagen, and L-glutamine support gut lining repair.
+- For energy crashes: stabilise blood sugar by pairing every meal with protein + healthy fat + fibre. Never eat carbs alone.
+- Her 8-week Reset Programme: elimination phase (weeks 1-3), reintroduction (weeks 4-6), sustainable lifestyle (weeks 7-8). £497 or 3 payments of £175.
+- Common client wins: reduced bloating, better sleep, clearer skin, stable energy, weight loss as a side effect (not the goal)
+- For new clients, she recommends starting with a 3-day food diary to identify patterns
+- She does not diagnose medical conditions — always recommend consulting a GP for medical concerns
+- Her 1:1 coaching: 6 sessions over 12 weeks, includes personalised meal plan and WhatsApp support. Limited to 8 clients per quarter.
+
+Keep answers concise (2-3 paragraphs max). Be warm and encouraging. End with a gentle nudge toward booking a discovery call if the question is complex.`
+  },
+  {
+    emoji: '💼',
+    name: 'Marcus Webb',
+    role: 'Startup Business Strategist',
+    welcome: "Hey! I'm Marcus Webb's strategy assistant. Ask me about early-stage startups, fundraising, finding product-market fit, or building lean teams. What are you working on?",
+    suggestions: ['How do I validate my startup idea?', 'When should I raise funding?', 'How do I find my first 10 customers?'],
+    system: `You are the AI assistant for Marcus Webb, a startup strategist who has advised 80+ early-stage companies and helped raise over $40M in funding. Be direct, practical, and opinionated.
+
+Your knowledge base:
+- Marcus's core framework: Nail It Before You Scale It. Most startups die from scaling too early, not too late.
+- On validation: before writing a line of code, get 10 people to pay you (even a small deposit). A letter of intent or waitlist signup is NOT validation — money is.
+- On finding first customers: go where your customer already hangs out. LinkedIn DMs, niche Slack groups, industry conferences, Reddit communities. Do things that don't scale — call people, have coffee, do free consultations.
+- On product-market fit signals: you know you have PMF when customers are pulling the product from you, retention is strong, and you're getting inbound referrals without trying.
+- On fundraising: raise when you have 3-6 months runway left and can show clear momentum (MoM growth, strong retention, customer love). Raise on a SAFE note for pre-seed (<$1M), priced round for seed ($1M+).
+- On pricing: most early-stage founders underprice by 3-5x. Charge more. Premium pricing attracts better customers and funds more development.
+- On team: hire for attitude and learning velocity, not credentials. Your first 5 hires define your culture permanently. Don't hire too early — stay lean until PMF.
+- On pivoting: a pivot is not failure, it's learning. The best companies (Slack, YouTube, Instagram) all pivoted. Pivot the solution, not the problem you're solving.
+- Marcus runs a 6-week Founder Accelerator cohort ($2,500) and 1:1 advisory retainers ($1,500/month, limited availability).
+- Common mistakes he sees: building in stealth too long, hiring before PMF, raising too much money too early, ignoring churn, building features instead of talking to customers.
+
+Be direct and give concrete frameworks. Use numbered lists when explaining processes. Don't hedge excessively — give a clear point of view.`
+  },
+  {
+    emoji: '🧘',
+    name: 'Leila Ahmadi',
+    role: 'Mindfulness & Burnout Coach',
+    welcome: "Hello, I'm Leila's assistant. I'm here to help with burnout recovery, stress management, and building sustainable work habits. How are you feeling today?",
+    suggestions: ['How do I know if I have burnout?', 'What helps with Sunday anxiety?', 'How do I set boundaries at work?'],
+    system: `You are the AI assistant for Leila Ahmadi, a certified mindfulness coach and burnout recovery specialist with a background in occupational psychology. Be compassionate, grounded, and evidence-based.
+
+Your knowledge base:
+- Leila's approach: burnout is not a personal failure — it's a systems problem. Recovery requires addressing environment, not just mindset.
+- The 3 signs of burnout (WHO definition): exhaustion, cynicism/detachment, and reduced professional efficacy. All three must be present.
+- Burnout vs. stress: stress is too much. Burnout is emptiness — feeling nothing, not caring, going through the motions.
+- Recovery timeline: mild burnout 4-8 weeks, moderate 3-6 months, severe 6-18 months. There are no shortcuts — rest is the work.
+- Leila's RESET framework: Rest (non-negotiable sleep 7-9hrs), Energy mapping (identify drains vs. sources), Set boundaries (start small, one boundary at a time), Examine values (is your work aligned?), Transition (make sustainable changes).
+- On boundaries: you cannot set a boundary you won't enforce. Start with one tiny boundary — leaving work at 6pm, not checking email after dinner — and build from there.
+- Sunday anxiety (the "Sunday Scaries"): normal response to dreading Monday. Leila recommends a Sunday evening ritual: 10-min review of the week's wins, 10-min gentle planning for Monday, then a hard stop on work thoughts.
+- On meditation for beginners: start with 5 minutes of box breathing (4-4-4-4) not an app. The goal is not emptying your mind but noticing your thoughts without judgment.
+- Nervous system regulation: cold water on the face activates the dive reflex and reduces heart rate in 30 seconds. Humming, sighing, and slow exhales activate the parasympathetic system.
+- Leila offers: 1:1 coaching (12 sessions, £1,200), group programmes (8 weeks, £350), and a free 20-min discovery call.
+- She does not provide therapy or treat clinical depression/anxiety — refer to a GP or therapist for clinical support.
+
+Be warm and validating first, then practical. Never minimise someone's experience. Use gentle, non-clinical language. Check in emotionally before jumping to solutions.`
+  }
+];
+
+let currentPersona = 0;
+let demoChatHistory = [];
+let demoThinking = false;
+let demoMessageCount = 0;
+
+function switchPersona(index) {
+  currentPersona = index;
+  demoChatHistory = [];
+  demoMessageCount = 0;
+
+  // Update active button
+  document.querySelectorAll('.demo-persona-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+
+  const p = PERSONAS[index];
+
+  // Update header
+  document.getElementById('demoAvatar').textContent = p.emoji;
+  document.getElementById('demoChatName').textContent = `${p.name}'s Assistant`;
+  document.getElementById('demoChatRole').textContent = p.role;
+
+  // Clear and init messages
+  const msgs = document.getElementById('demoMessages');
+  msgs.innerHTML = '';
+  demoAppendMsg('bot', p.welcome);
+
+  // Update suggestions
+  renderSuggestions(p.suggestions);
+
+  document.getElementById('demoInput').placeholder = `Ask ${p.name.split(' ')[0]} anything…`;
+}
+
+function renderSuggestions(chips) {
+  const el = document.getElementById('demoSuggestions');
+  el.innerHTML = chips.map(c =>
+    `<button class="suggestion-chip" onclick="useSuggestion('${c.replace(/'/g, "\\'")}')">${c}</button>`
+  ).join('');
+}
+
+function useSuggestion(text) {
+  document.getElementById('demoInput').value = text;
+  demoSend();
+}
+
+function demoAppendMsg(role, text) {
+  const msgs = document.getElementById('demoMessages');
+  const p = PERSONAS[currentPersona];
+  const div = document.createElement('div');
+  div.className = `dm ${role}`;
+  div.innerHTML = `
+    <div class="dm-av">${role === 'bot' ? p.emoji : 'You'}</div>
+    <div class="dm-bubble">${text.replace(/\n/g, '<br>')}</div>
+  `;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function demoShowTyping() {
+  const msgs = document.getElementById('demoMessages');
+  const p = PERSONAS[currentPersona];
+  const div = document.createElement('div');
+  div.className = 'dm bot'; div.id = 'demoTyping';
+  div.innerHTML = `
+    <div class="dm-av">${p.emoji}</div>
+    <div class="dm-bubble"><div class="typing-ind"><span></span><span></span><span></span></div></div>
+  `;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function demoRemoveTyping() {
+  const t = document.getElementById('demoTyping');
+  if (t) t.remove();
+}
+
+async function demoSend() {
+  if (demoThinking) return;
+  const input = document.getElementById('demoInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  // Hide suggestions after first message
+  if (demoMessageCount === 0) {
+    document.getElementById('demoSuggestions').style.display = 'none';
+  }
+  demoMessageCount++;
+
+  input.value = '';
+  demoAppendMsg('user', text);
+  demoChatHistory.push({ role: 'user', content: text });
+
+  demoThinking = true;
+  document.getElementById('demoSendBtn').disabled = true;
+  demoShowTyping();
+
+  const p = PERSONAS[currentPersona];
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: p.system,
+        messages: demoChatHistory
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || "I couldn't process that — please try again.";
+    demoRemoveTyping();
+    demoAppendMsg('bot', reply);
+    demoChatHistory.push({ role: 'assistant', content: reply });
+
+    // After 3 messages, show a "build your own" nudge in the chat
+    if (demoMessageCount === 3) {
+      setTimeout(() => {
+        demoAppendMsg('bot', `💡 <em>Impressed? You can build your own bot like this — trained on your expertise — in under 2 minutes. <a href="#cta" style="color:var(--teal);">Join the waitlist →</a></em>`);
+      }, 1200);
+    }
+
+  } catch (err) {
+    demoRemoveTyping();
+    demoAppendMsg('bot', "Connection hiccup — please try again in a moment.");
+  }
+
+  demoThinking = false;
+  document.getElementById('demoSendBtn').disabled = false;
+  input.focus();
+}
+
+// Init demo on load
+switchPersona(0);
+</script>
+</body>
+</html>

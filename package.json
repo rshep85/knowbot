@@ -1,0 +1,12 @@
+{
+  "name": "knowbot-waitlist",
+  "version": "1.0.0",
+  "description": "KnowBot waitlist landing page + Vercel Edge API",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "vercel": "^37.0.0"
+  }
+}
